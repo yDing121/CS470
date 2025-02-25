@@ -1,0 +1,8 @@
+,age,resting blood pressure,serum cholesterol in mg/dl,maximum heart rate achieved,oldpeak = ST depression induced by exercise relative to rest,number of major vessels (0-3) colored by flourosopy
+Mean,54.84,130.27,247.01,147.57,0.902,0.63
+Std Dev,9.248226693247576,16.50947386420074,58.99195202771649,22.874384685658207,1.0792795951209513,0.8950481054731703
+Min,35.0,94.0,126.0,96.0,0.0,0.0
+Q1,47.0,120.0,209.0,129.75,0.0,0.0
+Median,57.0,130.0,234.5,149.5,0.45,0.0
+Q3,61.0,140.0,270.75,165.75,1.525,1.0
+Max,76.0,178.0,564.0,186.0,4.2,3.0
