@@ -83,4 +83,6 @@ if __name__ == "__main__":
 
     with open(output_path, "w") as f:
         for items_count_pair in frequent_itemsets:
-            f.write(" ".join(list(items_count_pair[0])) + f" ({items_count_pair[1]})\n")
+            line = " ".join(list(items_count_pair[0])) + f" ({items_count_pair[1]})\n"
+            print(line.strip())
+            f.write(line)
