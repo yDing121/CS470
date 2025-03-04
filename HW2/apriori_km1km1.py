@@ -100,8 +100,7 @@ if __name__ == "__main__":
     with open(output_path, "w") as fout:
         for items_count_pair in frequent_itemsets:
             line = " ".join(list(items_count_pair[0])) + f" ({items_count_pair[1]})\n"
-            # print(line.strip())
             fout.write(line)
     
-    with open("k-1k-1.pickle", "wb") as fout:
+    with open(f"{args.algorithm}.pickle", "wb") as fout:
         pickle.dump(frequent_itemsets, fout)

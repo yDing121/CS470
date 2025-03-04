@@ -42,7 +42,7 @@ class Trie:
 def parse_entry(entry) -> frozenset:
     return frozenset(entry.split(";"))
 
-def apriori_trie(df, colname, min_support):
+def apriori(df, colname, min_support):
     comparison_count = 0
     subset_check_count = 0
     trie_insert_count = 0
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     df = pd.read_csv(data_path)
 
     # Run Apriori with trie optimization
-    result, comparison_count, subset_check_count, trie_insert_count = apriori_trie(df, args.colname, args.min_support)
+    result, comparison_count, subset_check_count, trie_insert_count = apriori(df, args.colname, args.min_support)
     result.sort(key=lambda x: (x[1], list(x[0])))
     
     # Write output
