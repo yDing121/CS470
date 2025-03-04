@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 import os
 import sys
+import pickle
 
 
 def parse_entry(entry) -> list:
@@ -9,6 +10,8 @@ def parse_entry(entry) -> list:
 
 
 def apriori(df, column_name, min_support):
+    comparison_count = 0
+    subset_check_count = 0
     # Drop entries with empty item sets
     entries = df[column_name].dropna()
 
@@ -37,6 +40,7 @@ def apriori(df, column_name, min_support):
         # Candidate generation using F_k-1 x F_1
         for f_set in f_k_minus_1_keys:
             for item in f_1.keys():
+                comparison_count += 1 # Count comparison
                 candidate = f_set | item
                 if len(candidate) == k:
                     candidates.add(candidate)
@@ -45,6 +49,7 @@ def apriori(df, column_name, min_support):
         candidate_counts = {c: 0 for c in candidates}
         for entry in parsed_entries:
             for candidate in candidates:
+                subset_check_count += 1 # Count subset check
                 if candidate.issubset(entry):
                     candidate_counts[candidate] += 1
         
@@ -59,7 +64,9 @@ def apriori(df, column_name, min_support):
         f_k_minus_1 = f_k
         k += 1
     
-    return frequent_itemsets
+    # print(f"Comparison count: {comparison_count}")
+    # print(f"Subset check count: {subset_check_count}")
+    return frequent_itemsets, comparison_count, subset_check_count
 
 
 if __name__ == "__main__":
@@ -68,6 +75,8 @@ if __name__ == "__main__":
     parser.add_argument("--min_support", type=int, default=500, help="Minimum (absolute) support (integer)")
     parser.add_argument("--colname", type=str, default="text_keywords", help="Column name in the input file")
     parser.add_argument("--output", type=str, default="output.txt", help="Output file name. Will be outputted to the HW2 root directory")
+    parser.add_argument("--pickle", type=bool, default="False", help="Whether to pickle the itemsets")
+    parser.add_argument("--verbose", type=bool, default=False, help="Verbose output")
     args = parser.parse_args()
 
     # Load data
@@ -76,13 +85,21 @@ if __name__ == "__main__":
     df = pd.read_csv(data_path)
 
     # Run apriori
-    frequent_itemsets = apriori(df, args.colname, args.min_support)
+    frequent_itemsets, comparison_count, subset_check_count = apriori(df, args.colname, args.min_support)
 
+    # Semi-radix sort for ordering primarily by count, then by items
+    frequent_itemsets.sort(key = lambda x: x[0])
+    frequent_itemsets.sort(key = lambda x: x[1])
+    
     # Output
     output_path = os.path.join(script_path, args.output)
 
-    with open(output_path, "w") as f:
+    with open(output_path, "w") as fout:
         for items_count_pair in frequent_itemsets:
             line = " ".join(list(items_count_pair[0])) + f" ({items_count_pair[1]})\n"
-            print(line.strip())
-            f.write(line)
+            if args.verbose:
+                print(line.strip())
+            fout.write(line)
+    
+    with open("k1k-1.pickle", "wb") as fout:
+        pickle.dump(frequent_itemsets, fout)
