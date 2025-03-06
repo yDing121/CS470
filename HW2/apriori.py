@@ -12,8 +12,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Apriori algorithm")
     parser.add_argument("--input", type=str, default="data.csv", help="Input file path, relative to HW2 root directory")
     parser.add_argument("--min_support", type=int, default=500, help="Minimum (absolute) support (integer)")
-    parser.add_argument("--colname", type=str, default="text_keywords", help="Column name in the input file")
     parser.add_argument("--output", type=str, default="output.txt", help="Output file name. Will be outputted to the HW2 root directory")
+    parser.add_argument("--colname", type=str, default="text_keywords", help="Column name in the input file")
     parser.add_argument("--pickle", type=bool, default="False", help="Whether to pickle the itemsets")
     parser.add_argument("--algorithm", type=str, default="km1km1", help="Apriori variant")
     args = parser.parse_args()
@@ -39,8 +39,8 @@ if __name__ == "__main__":
     # Run apriori
     frequent_itemsets, *_ = apriori(df, args.colname, args.min_support)
 
-    # Semi-radix sort for ordering primarily by count, then by items
-    frequent_itemsets.sort(key=lambda x: (x[1], list(x[0])))
+    # Semi-radix sort for ordering primarily by count (descending), then by items
+    frequent_itemsets.sort(key=lambda x: (-1 * x[1], list(x[0])))
     
     # Output
     output_path = os.path.join(script_path, args.output)

@@ -1,5 +1,5 @@
 numpy
 pandas
-notebook
-matplotlib
-seaborn
+# notebook
+# matplotlib
+# seaborn

@@ -1,1 +1,7 @@
-.idea/
+*/.idea/*
+*/.vscode/*
+*/.variants/*
+*/venv/*
+*/__pycache__/*
+*/.venv/*
+
