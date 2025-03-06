@@ -12,7 +12,7 @@ Install requirements: `pip install -r requirements.txt`
 # Running script
 
 To run, start a terminal at the `HW2` root directory, then:
-`python script.py --input <input_file> --min_support <min_support> --output <output_file> --colname <column_name> --pickle <True/False> --algorithm <algorithm_variant>`
+`python apriori.py --input <input_file> --min_support <min_support> --output <output_file> --colname <column_name> --pickle <True/False> --algorithm <algorithm_variant>`
 
 
 Command line options:

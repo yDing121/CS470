@@ -1,8 +1,0 @@
-.idea/
-.vscode
-.variants
-*/venv/*
-.ipynb_checkpoints
-__pycache__
-.venv
-
