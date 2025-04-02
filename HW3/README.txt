@@ -4,9 +4,10 @@ OTHER STUDENTS. Yilang Ding */
 
 # Environment
 
-I am running a Python 3.12.7 virtual environment created using `python -m venv venv`. 
+I am running a Python 3.12.6 virtual environment created using `python -m venv venv`. 
 Required libraries are documented in `requirements.txt`, and can be installed via 
-`pip install -r requirements.txt` after environment activation.
+`pip install -r requirements.txt` after environment activation. The setup has been
+tested with a clean install on x86 Windows 10 with Python 3.12.6.
 
 # Notes
 
