@@ -16,3 +16,4 @@ The actual Decision Tree Classifier is in `decision_tree.py`. The script takes f
 input parameters as required by the homework statement. For usage instructions,
 refer to the help output of argparse for the script: `python decision_tree.py -h`.
 The script is set up to default to using the given file names in the same directory.
+The report is in CS470_HW3.pdf
